@@ -40,7 +40,7 @@
     header {
       background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
       color: #fff;
-      padding: 3rem 1.5rem;
+      padding: 3rem 1.5rem 2.5rem;
       text-align: center;
       box-shadow: inset 0 -4px 20px rgba(15, 23, 42, 0.18);
     }
@@ -58,9 +58,45 @@
       font-size: 1.05rem;
     }
 
+    /* Sticky Search Bar Submenu Row */
+    .search-nav {
+      position: sticky;
+      top: 0;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0.85rem 1.5rem;
+      z-index: 100;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    .search-wrapper {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+    }
+
+    .search-input {
+      width: 100%;
+      max-width: 600px;
+      padding: 0.75rem 1.25rem;
+      font-size: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      outline: none;
+      background: var(--surface-alt);
+      transition: all 0.2s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent);
+      background: var(--surface);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
     main {
       display: grid;
-      grid-template-columns: minmax(220px, 260px) 1fr;
+      grid-template-columns: minmax(240px, 280px) 1fr;
       gap: 1.75rem;
       max-width: 1180px;
       margin: 0 auto;
@@ -69,7 +105,7 @@
 
     aside {
       position: sticky;
-      top: 1.5rem;
+      top: 5.5rem;
       align-self: start;
     }
 
@@ -83,7 +119,7 @@
 
     .toc h2 {
       margin: 0 0 1rem;
-      font-size: 0.95rem;
+      font-size: 0.85rem;
       color: var(--muted);
       letter-spacing: 0.16em;
       text-transform: uppercase;
@@ -102,7 +138,7 @@
     .toc a {
       color: var(--text);
       text-decoration: none;
-      font-size: 1rem;
+      font-size: 0.95rem;
       display: block;
     }
 
@@ -122,6 +158,7 @@
       border-radius: 1.5rem;
       box-shadow: var(--shadow);
       padding: 2rem;
+      transition: opacity 0.2s ease, transform 0.2s ease;
     }
 
     section h2,
@@ -163,19 +200,30 @@
       font-size: 1.25rem;
     }
 
-    .highlight {
-      display: inline-block;
-      margin-top: 1.25rem;
-      padding: 0.95rem 1.2rem;
-      border-radius: 999px;
-      background: #eff6ff;
-      color: #1d4ed8;
-      font-size: 0.97rem;
-      border: 1px solid #bfdbfe;
+    .card ul {
+      margin: 0.5rem 0 0;
+      padding-left: 1.2rem;
+      color: var(--muted);
+    }
+
+    .no-results {
+      display: none;
+      text-align: center;
+      padding: 3rem;
+      background: var(--surface);
+      border-radius: 1.5rem;
+      border: 1px dashed var(--border);
+      color: var(--muted);
+    }
+
+    #site-version-container {
+      text-align: center;
+      padding: 0.5rem;
+      color: var(--muted);
+      font-size: 0.8rem;
     }
 
     footer {
-      grid-column: 1 / -1;
       text-align: center;
       padding: 1.5rem 0 2rem;
       color: var(--muted);
@@ -198,7 +246,16 @@
     <h1>max's taxonomy</h1>
     <p>Explore the classification of life, from real-world species to imagined creatures and their worlds. Learn, compare, and discover the patterns that connect living things and the stories they inspire.</p>
   </header>
+
+  <!-- Functional Wiki Search Row -->
+  <nav class="search-nav">
+    <div class="search-wrapper">
+      <input type="text" id="wikiSearch" class="search-input" placeholder="🔍 Search taxa, kingdoms, species, or creative systems...">
+    </div>
+  </nav>
+  
   <main>
+<<<<<<< Updated upstream
     <section>
       <h2>About This Site</h2>
       <p>max's taxonomy is a homepage for both scientific classification and creative taxonomy. It brings together factual information about biological groups and fictional systems used in novels, games, and worldbuilding.</p>
@@ -221,13 +278,122 @@
       <h2>Get Started</h2>
       <p>Use the navigation to jump into the sections that interest you, or search for a taxon or creature name. Whether you're a student, writer, or worldbuilder, this site helps you connect patterns across reality and imagination.</p>
     </section>
+=======
+    <!-- Left Column: Sidebar Navigation -->
+    <aside>
+      <nav class="toc">
+        <h2>Fictional Genera</h2>
+        <ul>
+          <li><a href="#" onclick="filterByTerm('Curvis')">🧬 Genus: <em>Curvis</em></a></li>
+          <li><a href="#" onclick="filterByTerm('Pikachusa')">🧬 Genus: <em>Pikachusa</em></a></li>
+          <li><a href="#" onclick="filterByTerm('Legoa')">🧬 Genus: <em>Legoa</em></a></li>
+          <li><a href="#" onclick="filterByTerm('Boxals')">🧬 Genus: <em>Boxals</em></a></li>
+          <li><a href="#" onclick="filterByTerm('Mermada')">🧬 Genus: <em>Mermada</em></a></li>
+          <li><a href="#" onclick="clearSearch()" style="margin-top: 1rem; color: var(--accent); font-size: 0.85rem; font-weight: bold;">🔄 Show All Sections</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Right Column: Searchable Sections Grid -->
+    <div class="content" id="wikiContent">
+      
+      <!-- Section 1 -->
+      <section data-search="about this site homepage introduction biological groups creative worldbuilding">
+        <h2>About This Site</h2>
+        <p>max's taxonomy is a homepage for both scientific classification and creative taxonomy. It brings together factual information about biological groups and fictional systems used in novels, games, and worldbuilding.</p>
+      </section>
+
+      <!-- Section 2 (Grid Content Blocks) -->
+      <section class="grid" data-search="real fictional taxonomy compare create pokemon historical fantasy cartoons characters sky pod curvis">
+        <article class="card">
+          <h3>Real Taxonomy</h3>
+          <p>Browse kingdoms, phyla, classes, orders, families, genera, and species. Understand how scientists categorize organisms from bacteria to mammals and how classification changes with new discoveries.</p>
+        </article>
+        <article class="card">
+          <h3>Fictional Taxonomy</h3>
+          <p>I also have a section dedicated to fictional organisms like Pokémon (Pikachusa, Sloteoata), historical and fantasy creatures, video game characters, and cartoons (Curvis, Boxals, Mermada).</p>
+        </article>
+        <article class="card">
+          <h3>Compare &amp; Create</h3>
+          <p>Compare real and fictional grouping systems, and use the ideas here to build your own taxonomy for characters, creatures, or ecosystems.</p>
+        </article>
+      </section>
+
+      <!-- Section 3 -->
+      <section data-search="get started navigation search taxon creature name student writer worldbuilder reality imagination">
+        <h2>Get Started</h2>
+        <p>Use the navigation to jump into the sections that interest you, or search for a taxon or creature name. Whether you're a student, writer, or worldbuilder, this site helps you connect patterns across reality and imagination.</p>
+      </section>
+
+      <!-- Section 4 (Real Kingdoms Area) -->
+      <section class="grid" data-search="animalia arthropoda chordata mollusca plantae bryophyta magnoliophyta polypodiophyta pinophyta fungi basidiomycota ascomycota zygomycota kingdoms real">
+        <article class="card">
+          <h3>Animalia</h3>
+          <ul> 
+            <li>Arthropoda</li>
+            <li>Chordata</li>
+            <li>Mollusca</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Plantae</h3>
+          <ul> 
+            <li>Bryophyta</li>
+            <li>Magnoliophyta</li>
+            <li>Polypodiophyta</li>
+            <li>Pinophyta</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Fungi</h3>
+          <ul> 
+            <li>Basidiomycota</li>
+            <li>Ascomycota</li>
+            <li>Zygomycota</li>
+          </ul>
+        </article>
+      </section>
+
+      <!-- Dynamic Placeholder if query fails -->
+      <div id="noResults" class="no-results">
+        <h3>No matching biological classifications found</h3>
+        <p>Try searching for terms like "Animalia", "Curvis", "Fictional", or "Fungi".</p>
+      </div>
+
+    </div>
+>>>>>>> Stashed changes
   </main>
+
   <footer>
     <p>max's taxonomy &copy; 2026</p>
+    <div id="site-version-container">
+      <span>Website = v1.0</span> | <span>Page = v1.1</span> | <span>Engine = v2.0 (Wiki Search Enabled)</span>
+    </div>
   </footer>
-  <!-- Version: change the text inside the span (#site-version) to update the displayed version -->
-  <div id="site-version">Website = v1.0</div>
-  <div id="site-version">Page = v1.1</div>
-</body>
-</html>
 
+  <!-- Instant Wiki Filter Script -->
+  <script>
+    const searchInput = document.getElementById('wikiSearch');
+    const sections = document.querySelectorAll('#wikiContent section');
+    const noResults = document.getElementById('noResults');
+
+    searchInput.addEventListener('input', function(e) {
+      performSearch(e.target.value);
+    });
+
+    function performSearch(query) {
+      const searchTerm = query.trim().toLowerCase();
+      let anyVisible = false;
+
+      sections.forEach(section => {
+        const searchableText = section.getAttribute('data-search').toLowerCase();
+        if (searchableText.includes(searchTerm)) {
+          section.style.display = '';
+          anyVisible = true;
+        } else {
+          section.style.display = 'none';
+        }
+      });
+
+      noResults.style.display = anyVisible ? 'none' : '';
+    }
