@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>max's taxonomy - Curvis mascotsa></div></title>
+  <style>
+    :root {
+      --bg: #eef2f7;
+      --surface: #ffffff;
+      --surface-alt: #f8fafc;
+      --text: #111827;
+      --muted: #475569;
+      --accent: #2563eb;
+      --border: #d1dfea;
+      --shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+      --wiki-green: #0d9488;
+      --wiki-orange: #ea580c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* Wiki Top Navigation Bar */
+    header {
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      color: #fff;
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.1);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      letter-spacing: -0.03em;
+    }
+
+    header h1 a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .search-box {
+      position: relative;
+    }
+
+    .search-box input {
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-size: 0.95rem;
+      width: 260px;
+      transition: all 0.2s ease;
+    }
+
+    .search-box input::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .search-box input:focus {
+      outline: none;
+      background: #fff;
+      color: var(--text);
+      border-color: #fff;
+    }
+
+    /* Main Wiki Layout */
+    .breadcrumbs {
+      max-width: 1180px;
+      margin: 1.5rem auto 0;
+      padding: 0 1.5rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .breadcrumbs a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: 1fr minmax(280px, 320px);
+      gap: 2rem;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem 3rem;
+    }
+
+    /* Article Content Area */
+    .wiki-article {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .species-title {
+      margin-top: 0;
+      font-size: 2.5rem;
+      line-height: 1.2;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .species-title em {
+      font-style: italic;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+    }
+
+    .badge.fictional {
+      background: #f0fdf4;
+      color: var(--wiki-green);
+      border: 1px solid #bbf7d0;
+    }
+
+    .badge.real {
+      background: #fff7ed;
+      color: var(--wiki-orange);
+      border: 1px solid #fed7aa;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 0.4rem;
+      margin-top: 2rem;
+      color: var(--text);
+    }
+
+    /* Taxonomy Sidebar (Taxobox) */
+    .taxobox {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1.25rem;
+      padding: 1.25rem;
+      box-shadow: var(--shadow);
+      align-self: start;
+      position: sticky;
+      top: 1.5rem;
+    }
+
+    .taxobox-title {
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      color: white;
+      text-align: center;
+      padding: 0.75rem;
+      font-weight: bold;
+      border-radius: 0.75rem;
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    /* Dynamic header background color based on real vs fictional */
+    .taxobox.fictional-theme .taxobox-title {
+      background: linear-gradient(135deg, #0d9488 0%, #0f766e 100__);
+    }
+
+    .taxobox.real-theme .taxobox-title {
+      background: linear-gradient(135deg, #ea580c 0%, #c2410c 100__);
+    }
+
+    .taxobox-img {
+      width: 100%;
+      height: 200px;
+      background: var(--surface-alt);
+      border: 1px dashed var(--border);
+      border-radius: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+
+    .taxobox-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .taxobox-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    .taxobox-table tr {
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .taxobox-table td {
+      padding: 0.5rem 0.25rem;
+    }
+
+    .taxobox-table td:first-child {
+      font-weight: 600;
+      color: var(--muted);
+      width: 40%;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      border-top: 1px solid var(--border);
+      max-width: 1180px;
+      margin: 2rem auto 0;
+    }
+
+    /* Mobile Responsive Setup */
+    @media (max-width: 850px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+      .taxobox {
+        position: static;
+        order: -1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header>
+    <h1><a href="index.html">max's taxonomy</a></h1>
+    <div class="search-box">
+      <input type="text" placeholder="Search species or genus...">
+    </div>
+  </header>
+
+  <!-- Breadcrumbs -->
+  <div class="breadcrumbs">
+    <a href="index.html">Home</a> &raquo; <a href="#">Eukaryota</a> &raquo; <a href="#">Animalia</a> &raquo; <a href="#">Metallochordata</a> &raquo; <a href="#">Mechanica</a> &raquo; <a href="#">Vehiculumes</a> &raquo; <a href="#">Curvidae</a> &raquo; <a href="#">Curvis</a> &raquo; <em>Curvis mascotsa</em>
+  </div>
+  
+  <main>
+    <!-- Left Column: Main Wiki Content Area -->
+    <article class="wiki-article">
+      <h1 class="species-title">
+        <em>Curvis mascotsa</em> 
+        <!-- Change class to "real" or "fictional" to match target type -->
+        <span class="badge fictional">Fictional Species</span>
+      </h1>
+      
+      <p><strong><em>Curvis mascotsa</em></strong> (commonly known as the <strong>Common Curved Jet-engine</strong>) is a species of Jet-engine animal belonging to the family Curvidae. The species roams around and powers engines belonging to air vehicles by utilizing its unique curved jet propulsion system. The most famous of it's kind is "Sky Pod", a character in Air Canada kids books, according to them "Making flying more fun for kids".</p>
+
+      <h2>Anatomy & Physical Traits</h2>
+      <p>[Describe what the organism looks like, its size, skeletal structures, coloration, external features, and physical adaptations here].</p>
+
+      <h2>Habitat & Distribution</h2>
+      <p>[Describe where this organism lives, its geographic locations, environmental biomes, or the specific media franchise ecosystem it populates].</p>
+
+      <h2>Behavior & Ecology</h2>
+      <p>[Describe how the organism behaves, its survival mechanisms, social structures, interactions with other species, or unique abilities/attacks here].</p>
+
+      <h2>Evolution & Taxonomy</h2>
+      <p>[Detail its evolutionary history, when it split from related branches, its generational forms, or why it belongs under this specific genus categorization].</p>
+    </article>
+
+    <!-- Right Column: Taxonomy Sidebar (Taxobox) -->
+    <!-- Swap class to "real-theme" or "fictional-theme" to instantly toggle color design -->
+    <aside class="taxobox fictional-theme">
+      <h3 class="taxobox-title">[Common Name]</h3>
+      
+      <div class="taxobox-img">
+        <!-- Replace with an actual img tag when ready: <img src="image.jpg" alt="Species Image"> -->
+        <span>[ Image Placeholder ]</span>
+      </div>
+
+      <table class="taxobox-table">
+        <tr>
+          <td>Domain:</td>
+          <td>[Domain Name]</td>
+        </tr>
+        <tr>
+          <td>Kingdom:</td>
+          <td>[Kingdom Name]</td>
+        </tr>
+        <tr>
+          <td>Phylum:</td>
+          <td>[Phylum Name]</td>
+        </tr>
+        <tr>
+          <td>Class:</td>
+          <td>[Class Name]</td>
+        </tr>
+        <tr>
+          <td>Order:</td>
+          <td>[Order Name]</td>
+        </tr>
+        <tr>
+          <td>Family:</td>
+          <td>[Family Name]</td>
+        </tr>
+        <tr>
+          <td>Genus:</td>
+          <td><strong><em>[Genus]</em></strong></td>
+        </tr>
+        <tr>
+          <td>Species:</td>
+          <td><strong><em>[G. species]</em></strong></td>
+        </tr>
+      </table>
+    </aside>
+  </main>
+
+  <footer>
+    <p>max's taxonomy &copy; 2026</p>
+  </footer>
+
+</body>
+</html>
